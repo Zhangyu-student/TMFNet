@@ -1,5 +1,5 @@
 # === runtime artifacts / results ===
-checkpoints/ablaion_exp_old
+checkpoints/ablation_exp_old
 logs/
 
 comparison_results/
@@ -8,3 +8,4 @@ evaluation_results/
 # 你的 inference_results 有很多变体：inference_results / inference_results_old / inference_results_xxx
 inference_results*/
 *_results/.idea/
+inception-2015-12-05.pt
