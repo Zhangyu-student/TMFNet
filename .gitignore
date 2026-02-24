@@ -1,5 +1,5 @@
 # === runtime artifacts / results ===
-checkpoints/ablation_exp_old
+checkpoints/
 logs/
 
 comparison_results/
