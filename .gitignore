@@ -9,3 +9,4 @@ evaluation_results/
 inference_results*/
 *_results/.idea/
 inception-2015-12-05.pt
+.idea/
