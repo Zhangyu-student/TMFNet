@@ -1,7 +1,7 @@
 import torch.nn.functional as F
 from loss import MultiLoss
 from setup_utils import create_model, create_dataloaders
-from tqdm import tqdm  # 导入进度条库
+from tqdm import tqdm
 from skimage.metrics import peak_signal_noise_ratio as psnr_skimage
 from metrics import mae, calculate_sam_rgb, psnr_skimage, process_rgb, ssim_skimage
 from training_utils import *
@@ -143,63 +143,34 @@ def main():
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-    # 训练配置
-    config = {
-        'device': 'cuda' if torch.cuda.is_available() else 'cpu',
-        'data_root': r'M:\多时相云修复数据集\s2_asiaWest\S2PatchDataset',
-        'batch_size': 1,
-        'num_epochs': 300,
-        'valid_interval': 1,
-        'save_dir': './checkpoints',
-        'vis_dir': './visualizations',
-        'log_file': './train_logs_landsat.csv',
-        'log_dir': './runs',
-        'pretrained_path': './checkpoints/model_epoch_10000.pth',
-        'dataset_type': 's2asiawest'
-    }
-
-    # config = {
-    #     'device': 'cuda' if torch.cuda.is_available() else 'cpu',
-    #     'data_root': 'F:\SENMS_NEW\landsat_dataset',
-    #     'batch_size': 1,
-    #     'num_epochs': 300,
-    #     'valid_interval': 1,
-    #     'save_dir': './checkpoints',
-    #     'vis_dir': './visualizations',
-    #     'log_file': './train_logs_landsat.csv',
-    #     'log_dir': './runs',
-    #     'pretrained_path': './checkpoints/model_epoch_10000.pth',
-    #     'dataset_type': 'landsat'
-    # }
-
-    # 训练配置
+    # 训练配置 Sen_MTC_New
     # config = {
     #     'device': 'cuda' if torch.cuda.is_available() else 'cpu',
     #     'data_root': '/root/autodl-tmp/data/dataset',
     #     'batch_size': 8,
-    #     'num_epochs': 300,
+    #     'num_epochs': 150,
     #     'valid_interval': 1,
-    #     'save_dir': './checkpoints',
+    #     'save_dir': './checkpoints_tmp',
     #     'vis_dir': './visualizations',
-    #     'log_file': './train_logs_new_no_fcac.csv',
+    #     'log_file': './train_logs_new_mamba_add_ssim.csv',
     #     'log_dir': './runs',
-    #     'pretrained_path': './checkpoints/model_epoch_10000.pth',
+    #     'pretrained_path': './checkpoints/model_epoch_100000.pth',
     #     'dataset_type': 'new_multi'
     # }
-
-    # config = {
-    #     'device': 'cuda' if torch.cuda.is_available() else 'cpu',
-    #     'data_root': '/root/autodl-tmp/data/multipleImage',
-    #     'batch_size': 8,
-    #     'num_epochs': 300,
-    #     'valid_interval': 1,
-    #     'save_dir': './checkpoints',
-    #     'vis_dir': './visualizations',
-    #     'log_file': './train_logs_old.csv',
-    #     'log_dir': './runs',
-    #     'pretrained_path': './checkpoints/model_epoch_300.pth',
-    #     'dataset_type': 'old_multi'
-    # }
+    # 训练配置 Sen_MTC_old
+    config = {
+        'device': 'cuda' if torch.cuda.is_available() else 'cpu',
+        'data_root': '/root/autodl-tmp/data/multipleImage',
+        'batch_size': 8,
+        'num_epochs': 150,
+        'valid_interval': 10,
+        'save_dir': './checkpoints_old',
+        'vis_dir': './visualizations_old',
+        'log_file': './train_logs_old_mamba.csv',
+        'log_dir': './runs',
+        'pretrained_path': './checkpoints/model_epoch_3000.pth',
+        'dataset_type': 'old_multi'
+    }
 
     # 创建输出目录
     os.makedirs(config['save_dir'], exist_ok=True)
@@ -234,11 +205,7 @@ def main():
         scheduler = create_scheduler(optimizer, config)
 
         device = torch.device(config['device'])
-        # New_dataset
-        loss_fn = MultiLoss(device, alpha=5, gamma=1, delta=1)
-
-        # Old_dataset
-        # loss_fn = MultiLoss(device, alpha=1, gamma=1, delta=1)
+        loss_fn = MultiLoss(device, alpha=0, gamma=0, delta=1)
         print("损失函数实例创建成功")
 
         # 数值初始化

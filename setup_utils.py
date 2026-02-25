@@ -10,6 +10,7 @@ def create_dataloaders(config):
         dataset_class = Sen2_MTC_New_Multi
         # 创建数据集实例
         train_dataset = dataset_class(data_root=config['data_root'], mode="train")
+        val_dataset = dataset_class(data_root=config['data_root'], mode="val")
         test_dataset = dataset_class(data_root=config['data_root'], mode="test")
         # 创建数据加载器
         train_loader = DataLoader(
@@ -19,6 +20,13 @@ def create_dataloaders(config):
             num_workers=config.get('num_workers', 4),
             pin_memory=True,
             persistent_workers=True
+        )
+        val_loader = DataLoader(
+            val_dataset,
+            batch_size=config['batch_size'],
+            shuffle=False,
+            num_workers=config.get('num_workers', 2),
+            pin_memory=True
         )
 
         test_loader = DataLoader(
@@ -44,6 +52,9 @@ def create_dataloaders(config):
 
         train_loader = DataLoader(train_data, batch_size=config['batch_size'], shuffle=True,
                                   num_workers= config.get('num_workers', 4), drop_last=False, pin_memory=True, persistent_workers=True)
+        val_loader = DataLoader(val_data, batch_size=config['batch_size'], shuffle=False,
+                                 num_workers=config.get('num_workers', 2), drop_last=False, pin_memory=True,
+                                 persistent_workers=True)
         test_loader = DataLoader(test_data, batch_size=config['batch_size'], shuffle=False,
                                 num_workers=config.get('num_workers', 2), drop_last=False, pin_memory=True, persistent_workers=True)
 
@@ -51,7 +62,7 @@ def create_dataloaders(config):
         raise ValueError(f"无效的dataset_type: {config['dataset_type']}")
 
 
-    return train_loader, test_loader
+    return train_loader, val_loader
 
 
 def create_model(config):
@@ -64,7 +75,7 @@ def create_model(config):
     else:
         raise ValueError(f"无效的dataset_type: {config['dataset_type']}")
 
-    model = TemporalMambaFusionNet(input_nc=3, output_nc=3, base=48).to(config['device'])
+    model = TemporalMambaFusionNet(input_nc=input_channels, output_nc=input_channels, base=48).to(config['device'])
 
     # 加载预训练权重（如果存在）
     pretrained_path = config.get('pretrained_path')
