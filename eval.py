@@ -215,9 +215,7 @@ def evaluate(gt_dir, pred_dir, output_dir="evaluation_results",
         try:
             # 计算PSNR和SSIM
             psnr_val = psnr(gt_img, pred_img, data_range=255)
-            # ssim_val = ssim(gt_img, pred_img, data_range=255, channel_axis=-1)
-            ssim_val = ssim(gt_img, pred_img, channel_axis=-1, multichannel=True, gaussian_weights=True,
-                         use_sample_covariance=False, sigma=1.5)
+            ssim_val = ssim(gt_img, pred_img, data_range=255, channel_axis=-1)
 
             # 计算SAM
             sam_val = calculate_sam_rgb(gt_img, pred_img)
@@ -306,9 +304,10 @@ def evaluate(gt_dir, pred_dir, output_dir="evaluation_results",
 if __name__ == "__main__":
     # 配置参数 - 在这里设置你的路径
     config = {
-        # "gt_dir": r"E:\研究生\研究生科研学习\paper3\inference_results\fid_real",  # 替换为真实图像目录
-        "gt_dir": r"E:\研究生\研究生科研学习\paper3\inference_results_old\fid_real",
-        "pred_dir": r"M:\beifen\Sen2_MTC_old实验结果\postprocess\CTGAN",  # 替换为预测图像目录
+        # "gt_dir": r"D:\研究生\论文代码\paper3\inference_results\old\inference_results_old\fid_real",  # 替换为真实图像目录
+        "gt_dir": r"D:\研究生\论文代码\paper3\inference_results\old\inference_results_old\fid_real",
+        # "pred_dir": r"D:\研究生\论文代码\paper3\inference_results\new\inference_results_all\fid_generated",  # 替换为预测图像目录
+        "pred_dir": r"E:\beifen\Sen2_MTC_old实验结果\postprocess\WaveCloudNet",  # 替换为预测图像目录
         "output_dir": "./evaluation_results",  # 结果输出目录
         "lpips_net": "alex",  # LPIPS网络类型: alex/vgg/squeeze
         "workers": 4,  # 数据加载线程数

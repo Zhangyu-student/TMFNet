@@ -1,6 +1,8 @@
 # === runtime artifacts / results ===
 checkpoints/
 logs/
+script/
+ablation_ssim_weight/
 
 comparison_results/
 evaluation_results/

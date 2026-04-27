@@ -7,7 +7,7 @@ from PIL import Image
 from skimage.metrics import structural_similarity as ssim
 from skimage.metrics import peak_signal_noise_ratio as psnr
 from dataset import Sen2_MTC_New_Multi
-from models.mamba_no_cwtf import TemporalMambaFusionNet
+from models.TMFNet import TemporalMambaFusionNet
 from lpips import LPIPS
 from cleanfid import fid
 from visualize2 import visualize_comparison
@@ -341,9 +341,9 @@ def inference(model_path, data_root, save_dir, batch_size=1, device='cuda', visu
 
 if __name__ == "__main__":
     config = {
-        "model_path": "./checkpoints/ablation_exp_old/TMFNet_no_CWTF.pth",
-        "data_root": r"F:\SENMS_NEW\CTGAN\CTGAN\Sen2_MTC\dataset",
-        "save_dir": "./inference_results_no_CWTF",
+        "model_path": "./pretrained/TMFNet_new.pth",
+        "data_root": r"E:\beifen\SENMS_NEW\CTGAN\CTGAN\Sen2_MTC\dataset",
+        "save_dir": "./inference_results",
         "batch_size": 2,
         "device": "cuda" if torch.cuda.is_available() else "cpu",
         "visualize_attention": False  # 添加可视化标志位
