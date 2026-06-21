@@ -192,12 +192,6 @@ The repository currently includes a local checkpoint path reference:
 
 - `pretrained/TMFNet_new.pth`
 
-If you plan to open-source the project, make sure the released checkpoint:
-
-- is the final public version
-- matches the paper model
-- can be downloaded by external users
-
 ## Citation
 
 If you use this repository, please cite:
@@ -216,6 +210,4 @@ If you use this repository, please cite:
 
 ## License
 
-`TBD`
-
-If you plan to make the repository public, add an explicit license file such as `MIT`, `Apache-2.0`, or another license compatible with your intended release.
+This project is released under the MIT License. See [LICENSE](LICENSE) for details.
