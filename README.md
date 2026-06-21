@@ -6,15 +6,19 @@ TMFNet performs pixel-wise temporal fusion over multi-temporal observations and 
 
 ## Paper
 
-This work has been accepted by **IEEE Geoscience and Remote Sensing Letters (GRSL)**.
+This work has been published in **IEEE Geoscience and Remote Sensing Letters (GRSL)**.
 
 **Title:** TemporalMambaFusionNet: Cloud-Aware Selective Temporal Fusion for Multi-Temporal Remote Sensing Cloud Removal
 
 **Authors:** Yu Zhang, Hairong Tang, Lijia Huang, and Peng Zhang
 
-**Status:** Accepted by IEEE Geoscience and Remote Sensing Letters
+**Journal:** IEEE Geoscience and Remote Sensing Letters, Volume 23
 
-**Paper link / DOI:** `TBD`
+**Article Sequence Number:** 6009105
+
+**Date of Publication:** 28 April 2026
+
+**DOI:** [10.1109/LGRS.2026.3687583](https://doi.org/10.1109/LGRS.2026.3687583)
 
 ## Highlights
 
@@ -196,7 +200,7 @@ If you plan to open-source the project, make sure the released checkpoint:
 
 ## Citation
 
-Please update volume, number, pages, and DOI after the final bibliographic information is available:
+If you use this repository, please cite:
 
 ```bibtex
 @article{tmfnet_grsl_2026,
@@ -204,10 +208,9 @@ Please update volume, number, pages, and DOI after the final bibliographic infor
   author  = {Zhang, Yu and Tang, Hairong and Huang, Lijia and Zhang, Peng},
   journal = {IEEE Geoscience and Remote Sensing Letters},
   year    = {2026},
-  volume  = {TBD},
-  number  = {TBD},
-  pages   = {TBD},
-  doi     = {TBD}
+  volume  = {23},
+  pages   = {6009105},
+  doi     = {10.1109/LGRS.2026.3687583}
 }
 ```
 
